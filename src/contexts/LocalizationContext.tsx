@@ -21,12 +21,27 @@ const translations = {
 };
 
 export const LocalizationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>('nl');
+  const [language, setLanguage] = useState<Language>(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const urlLang = params.get('lang');
+      if (urlLang === 'nl' || urlLang === 'ar') return urlLang;
+      const stored = localStorage.getItem('lang');
+      if (stored === 'nl' || stored === 'ar') return stored;
+    } catch (_) {}
+    return 'nl';
+  });
 
   useEffect(() => {
     // Set document direction and lang attribute
     document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
     document.documentElement.lang = language;
+    try {
+      localStorage.setItem('lang', language);
+      const url = new URL(window.location.href);
+      url.searchParams.set('lang', language);
+      window.history.replaceState(null, '', url.toString());
+    } catch (_) {}
   }, [language]);
 
   const value: LocalizationContextType = {

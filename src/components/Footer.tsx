@@ -1,7 +1,7 @@
 import { useLocalization } from '../contexts/LocalizationContext';
 
 function Footer() {
-  const { t } = useLocalization();
+  const { t, dir } = useLocalization();
 
   const getYear = () => {
     return new Date().getFullYear();
@@ -18,6 +18,11 @@ function Footer() {
             <p className="text-gray-400 text-sm">
               {t.footer.about.description}
             </p>
+            {/* Company Registry */}
+            <div className="mt-4 text-gray-400 text-sm">
+              <span className="text-gray-500">{t.footer.company.kvkLabel}: </span>
+              <span dir="ltr">{t.footer.company.kvkValue}</span>
+            </div>
           </div>
 
           {/* Contact Details */}
@@ -47,8 +52,9 @@ function Footer() {
 
           {/* Location */}
           <div>
-            <h4 className="text-white font-semibold mb-4">{t.footer.location.title}</h4>
-            <p className="text-gray-300">{t.footer.location.address}</p>
+            <h4 className={`text-white font-semibold mb-4 ${dir === 'rtl' ? 'text-right' : ''}`}>{t.footer.location.title}</h4>
+            <p className={`text-gray-300 ${dir === 'rtl' ? 'text-right' : ''}`} dir="ltr">{t.footer.location.address}</p>
+            <p className={`text-gray-500 text-xs mt-1 ${dir === 'rtl' ? 'text-right' : ''}`}>{t.footer.location.note}</p>
           </div>
 
           {/* Services */}

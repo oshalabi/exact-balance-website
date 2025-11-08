@@ -144,6 +144,10 @@ export const ar = {
       title: 'من نحن',
       description: 'Exact Balance هو مكتب محاسبة محترف متخصص في خدمة رواد الأعمال العرب في هولندا.',
     },
+    company: {
+      kvkLabel: 'رقم السجل التجاري (KVK)',
+      kvkValue: '89329988',
+    },
     contact: {
       title: 'اتصل بنا',
       phone: 'الهاتف',
@@ -152,7 +156,8 @@ export const ar = {
     },
     location: {
       title: 'الموقع',
-      address: 'هولندا',
+      address: 'Parkstraat 8B, 6828JH, Arnhem, Netherlands',
+      note: 'هذا العنوان ليس لاستقبال الزوار',
     },
     services: {
       title: 'الخدمات',

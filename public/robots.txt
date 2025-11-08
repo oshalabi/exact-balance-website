@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Update to your actual domain before deploy if different
+Sitemap: https://exactbalance.nl/sitemap.xml
+

@@ -144,6 +144,10 @@ export const nl = {
       title: 'Over Ons',
       description: 'Exact Balance is een professioneel administratiekantoor gespecialiseerd in dienstverlening voor Arabische ondernemers in Nederland.',
     },
+    company: {
+      kvkLabel: 'KVK-nummer',
+      kvkValue: '89329988',
+    },
     contact: {
       title: 'Contact',
       phone: 'Telefoon',
@@ -152,7 +156,8 @@ export const nl = {
     },
     location: {
       title: 'Locatie',
-      address: 'Nederland',
+      address: 'Parkstraat 8B, 6828JH, Arnhem, Netherlands',
+      note: 'Let op: Dit is geen bezoekadres',
     },
     services: {
       title: 'Diensten',
