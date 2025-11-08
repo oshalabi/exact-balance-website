@@ -1,8 +1,6 @@
-
 import { Package } from '../constants';
 import PackageCard from './PackageCard';
-
-
+import { useLocalization } from '../contexts/LocalizationContext';
 
 interface PricingProps {
   packages: Package[];
@@ -10,15 +8,17 @@ interface PricingProps {
 }
 
 function Pricing({ packages, onWhatsAppClick }: PricingProps) {
+  const { t } = useLocalization();
+
   return (
     <section className="bg-gray-800/30 backdrop-blur-sm py-20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white mb-4">
-            Onze Pakketten
+            {t.pricing.title}
           </h2>
           <p className="text-gray-400 text-lg">
-            Kies het pakket dat bij uw bedrijf past
+            {t.pricing.subtitle}
           </p>
         </div>
 
@@ -34,7 +34,7 @@ function Pricing({ packages, onWhatsAppClick }: PricingProps) {
 
         <div className="text-center mt-12">
           <p className="text-gray-400 text-sm max-w-2xl mx-auto">
-            * Alle prijzen zijn exclusief BTW. Werkzaamheden die niet binnen het pakket vallen, kunnen uiteraard worden toegevoegd tegen een kleine meerprijs.
+            {t.pricing.disclaimer}
           </p>
         </div>
       </div>

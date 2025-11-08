@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Services from './components/Services';
@@ -6,65 +5,67 @@ import WhyChoose from './components/WhyChoose';
 import Pricing from './components/Pricing';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import { LocalizationProvider, useLocalization } from './contexts/LocalizationContext';
 import { Package } from './constants';
 
-
-
-function App() {
-  const [whatsappNumber, setWhatsappNumber] = useState('+31620492806');
+function AppContent() {
+  const { t, language } = useLocalization();
+  const whatsappNumber = '+31620492806';
 
   const packages: Package[] = [
     {
-      name: 'BASIS PAKKET',
+      name: t.pricing.packages.basis.name,
       price: 60,
-      invoices: '20 tot 25 elk kwartaal',
+      invoices: t.pricing.packages.basis.invoices,
       features: {
         verwerkingAdministratie: true,
         btwAangifte: true,
-        inkomstenbelasting: 'Eenmalig €120 ex.btw',
+        inkomstenbelasting: t.pricing.features.inkomstenbelastingPrice,
         onlineBoekhoudpakket: true,
-        contact: 'E-mail & WhatsApp',
-        support: '30 Minuten per maand',
+        contact: t.pricing.contactOptions.email,
+        support: t.pricing.supportTime.thirty,
         jaarrekening: false,
         salarisadministratie: false
       }
     },
     {
-      name: 'Standaard Pakket',
+      name: t.pricing.packages.standaard.name,
       price: 100,
-      invoices: '50 tot 60 elk kwartaal',
+      invoices: t.pricing.packages.standaard.invoices,
       popular: true,
       features: {
         verwerkingAdministratie: true,
         btwAangifte: true,
         inkomstenbelasting: true,
         onlineBoekhoudpakket: true,
-        contact: 'E-mail & WhatsApp',
-        support: '60 Minuten per maand',
+        contact: t.pricing.contactOptions.email,
+        support: t.pricing.supportTime.sixty,
         jaarrekening: true,
         salarisadministratie: false
       }
     },
     {
-      name: 'Pro Pakket',
+      name: t.pricing.packages.pro.name,
       price: 150,
-      invoices: 'Onbeperkt',
+      invoices: t.pricing.packages.pro.invoices,
       features: {
         verwerkingAdministratie: true,
         btwAangifte: true,
         inkomstenbelasting: true,
         onlineBoekhoudpakket: true,
-        contact: 'E-mail & WhatsApp',
-        support: '120 Minuten per maand',
+        contact: t.pricing.contactOptions.emailPhone,
+        support: t.pricing.supportTime.unlimited,
         jaarrekening: true,
-        salarisadministratie: '€14 per Loonstrook'
+        salarisadministratie: t.pricing.features.salarisadministratiePrice
       }
     }
   ];
 
   const handleWhatsAppClick = (packageName: string) => {
-    const message = encodeURIComponent(`Hallo, ik ben geïnteresseerd in het ${packageName} pakket.`);
-    window.open(`https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${message}`, '_blank');
+    const message = language === 'nl'
+      ? `Hallo, ik ben geïnteresseerd in het ${packageName} pakket.`
+      : `مرحبًا، أنا مهتم بباقة ${packageName}.`;
+    window.open(`https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   return (
@@ -81,6 +82,14 @@ function App() {
       </div>
       <Footer />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <LocalizationProvider>
+      <AppContent />
+    </LocalizationProvider>
   );
 }
 
